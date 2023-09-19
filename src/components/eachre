@@ -1,0 +1,76 @@
+// import React, { useState } from "react";
+// import { useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+// import Axios from "axios";
+
+// export const EachReplyCounsellor = ({
+//   item,
+//   getComment,
+//   postId,
+//   commentId,
+// }) => {
+//   const [loadingItemId, setLoadingItemId] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const navigate = useNavigate();
+//   const token = useSelector((state) => {
+//     return state.user.token;
+//   });
+
+//   const userId = useSelector((state) => {
+//     return state.user.user.id;
+//   });
+//   const deleteCounsellorReply = async (id) => {
+//     setLoading(true);
+//     try {
+//       const data = await Axios.delete(
+//         `https://restapis.myconfessionz.com/api/counselor-delete-reply/${id}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+//       getComment();
+//       if (data.status === 500) {
+//         navigate("/homepage");
+//       }
+//       // console.log(data);
+//       setLoading(false);
+//     } catch (error) {
+//       setLoading(false);
+//       console.log(error);
+//       // navigate("/login");
+//       navigate("/homepage");
+//     }
+//   };
+//   return (
+//     <div className="mb-4  bg-white pt-3 pb-2 px-2 rounded">
+//       <h4>{item.counselor_reply}</h4>
+//       {userId === item.counselor_id && (
+//         <div>
+//           <button
+//             onClick={() => {
+//               deleteCounsellorReply(item.id);
+//               setLoadingItemId(item.id);
+//             }}
+//             className="bg-[red] mt-2 rounded-lg text-white p-2"
+//           >
+//             {loading && loadingItemId === item.id ? (
+//               <div className=" flex items-center">
+//                 <div
+//                   class="spinner-border float-end mr-2 text-[5px]"
+//                   role="status"
+//                 >
+//                   <span class="visually-hidden">Loading...</span>
+//                 </div>
+//                 Loading
+//               </div>
+//             ) : (
+//               <div className="">Delete</div>
+//             )}
+//           </button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
