@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
 import {
@@ -7,10 +7,10 @@ import {
   setCounsellorComments,
 } from "../redux/actions/UserActions";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { EachReply } from "./eachreply";
-import { EachcommentForCounsellor } from "./eachcommentForCounsellor";
+// import { EachcommentForCounsellor } from "./eachcommentForCounsellor";
 import { EachReplyCounsellor } from "./eachreplyCousellor";
 
 export const Eachcomment = ({ item }) => {
@@ -28,16 +28,16 @@ export const Eachcomment = ({ item }) => {
   const [counsellorReplies, setCounsellorReplies] = useState([]);
   const [modalData, setModalData] = useState([]);
   const [newReply, setNewReply] = useState("");
-  const [loadingItemId, setLoadingItemId] = useState(null);
+  // const [loadingItemId, setLoadingItemId] = useState(null);
   const [allLikes, setAllLikes] = useState(0);
-  const [allReplies, setAllReplies] = useState(0);
+  // const [allReplies, setAllReplies] = useState(0);
 
   const user = useSelector((state) => {
     return state?.user?.user?.usercode;
   });
-  const username = useSelector((state) => {
-    return state?.user?.user?.username;
-  });
+  // const username = useSelector((state) => {
+  //   return state?.user?.user?.username;
+  // });
   const userId = useSelector((state) => {
     return state.user.user.id;
   });
@@ -87,7 +87,7 @@ export const Eachcomment = ({ item }) => {
         dispatch(setCommentss(newlist));
         setLoading(false);
       } else {
-        const data = await Axios.delete(
+        await Axios.delete(
           `https://restapis.myconfessionz.com/api/counselor-delete-comment/${id}`,
 
           {
@@ -186,7 +186,7 @@ export const Eachcomment = ({ item }) => {
         setReplies(response.data.userReplies);
         setCounsellorReplies(response.data.counselorReplies);
         setAllLikes(response.data.allLikes);
-        setAllReplies(response.data.allReplies);
+        // setAllReplies(response.data.allReplies);
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -203,7 +203,7 @@ export const Eachcomment = ({ item }) => {
         );
 
         setAllLikes(response.data.allLikes);
-        setAllReplies(response.data.allReplies);
+        // setAllReplies(response.data.allReplies);
         console.log(response);
         const isThere = response.data?.userLikes?.find(
           (item) => item.user_id === userId
@@ -223,6 +223,7 @@ export const Eachcomment = ({ item }) => {
     }
   };
 
+  // eslint-disable-next-line
   useEffect(() => {
     getComment();
   }, []);
@@ -440,9 +441,7 @@ export const Eachcomment = ({ item }) => {
             <div
               onClick={() => {
                 handleShow();
-                {
-                  console.log(item.id);
-                }
+
                 setModalData({
                   commentId: item.id,
                   title: item.comment,
